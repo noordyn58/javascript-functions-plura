@@ -45,11 +45,11 @@ const printCells = (state) => {
     return accumulator;
 };
 
-const getNeighborsOf = ([x, y]) => [
+const getNeighborsOf = ([x, y]) =>{
   [x-1, y+1], [x, y+1] [x+1, y+1],
   [x-1, y],            [x+1, y],
   [x-1, y-1], [x, y-1],[x+1, y-1] 
-];
+};
 
 const getLivingNeighbors = (cell, state) => {
   return getNeighborsOf(cell).filter(n => contains.bind(state)(n));
@@ -75,17 +75,17 @@ const calculateNext = (state) => {
     return result;
 };
 
-// const iterate = (state, iterations) => {
-//   const states = [state];
-//   for(let i = 0; i < iterations; i++) {
-//       states.push(calculateNext(states[states.length-1]));
-//   }
-//   return states;
-// };
+const iterate = (state, iterations) => {
+  const states = [state];
+  for(let i = 0; i < iterations; i++) {
+      states.push(calculateNext(states[states.length-1]));
+  }
+  return states;
+};
 
-// const main = (pattern, iterations) => {
-//   const results = iterate(startPatterns[pattern], iterations);
-//   results.forEach(r => console.log(printCells(r)));
+const main = (pattern, iterations) => {
+  const results = iterate(startPatterns[pattern], iterations);
+  results.forEach(r => console.log(printCells(r)));
 };
 
 const startPatterns = {
